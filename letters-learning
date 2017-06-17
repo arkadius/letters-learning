@@ -1,0 +1,62 @@
+#!/bin/bash
+
+say() {
+  milena_say $*
+}
+
+usage() {
+  app=`basename $0`
+  echo -e "$app [options]"
+  echo -e "Available options:"
+  echo -e " --help\t\thelp"
+  echo -e " --no-leters\tno spelling of options"
+  echo -e " --sentences\tspelling full sentences after line break"
+}
+
+no_letters=false
+sentences=false
+
+case $1 in
+  "--no-letters")
+    no_letters=true ;;
+  "--sentences")
+    sentences=true ;;
+  "--help")
+    usage
+    exit 0 ;;
+  "")
+    ;;
+  *)
+    echo "Ivalid option: $1"
+    usage
+    exit 1 ;;
+esac
+
+if $sentences; then
+  sentence=""
+  while read line; do
+    if [[ $line != "" ]]; then
+      sentence="$line"
+    fi
+    say $sentence
+  done
+else
+  IFS=''
+  word=""
+  lastspace=false
+  while read -n1 c; do
+    if [[ $c = " " ]]; then
+      say $word 
+      lastspace=true
+    else
+      if ! $no_letters; then
+        say $c
+      fi
+      if $lastspace; then
+        word=""
+      fi
+      word="$word$c"
+      lastspace=false
+    fi
+  done
+fi
