@@ -9,8 +9,8 @@ usage() {
   echo -e "$app [options]"
   echo -e "Available options:"
   echo -e " --help\t\thelp"
-  echo -e " --no-leters\tno spelling of options"
-  echo -e " --sentences\tspelling full sentences after line break"
+  echo -e " --no-letters\tnot pronounce each letters"
+  echo -e " --sentences\tpronounce full sentences after line break"
 }
 
 no_letters=false
