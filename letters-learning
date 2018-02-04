@@ -10,15 +10,19 @@ usage() {
   echo -e "Available options:"
   echo -e " --help\t\thelp"
   echo -e " --no-letters\tnot pronounce each letters"
+  echo -e " --no-words\tnot pronounce word after space"
   echo -e " --sentences\tpronounce full sentences after line break"
 }
 
 no_letters=false
+no_words=false
 sentences=false
 
 case $1 in
   "--no-letters")
     no_letters=true ;;
+  "--no-words")
+    no_words=true ;;
   "--sentences")
     sentences=true ;;
   "--help")
@@ -45,7 +49,7 @@ else
   word=""
   lastspace=false
   while read -n1 c; do
-    if [[ $c = " " ]]; then
+    if [[ $c = " " && ! no_words ]]; then
       say $word 
       lastspace=true
     else
