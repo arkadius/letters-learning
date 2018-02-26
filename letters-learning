@@ -39,22 +39,22 @@ esac
 if $sentences; then
   sentence=""
   while read line; do
-    if [[ $line != "" ]]; then
+    if [[ "$line" != "" ]]; then
       sentence="$line"
     fi
-    say $sentence
+    say "$sentence"
   done
 else
   IFS=''
   word=""
   lastspace=false
   while read -n1 c; do
-    if [[ $c = " " ]] && ! "$no_words"; then
+    if [[ "$c" = " " && ! "$no_words" = true ]]; then
       say $word 
       lastspace=true
     else
-      if ! $no_letters; then
-        say $c
+      if [[ ! "$no_letters" = true ]]; then
+        say "$c"
       fi
       if $lastspace; then
         word=""
