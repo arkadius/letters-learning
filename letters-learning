@@ -49,7 +49,7 @@ else
   word=""
   lastspace=false
   while read -n1 c; do
-    if [[ $c = " " && ! no_words ]]; then
+    if [[ $c = " " ]] && ! "$no_words"; then
       say $word 
       lastspace=true
     else
